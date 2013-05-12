@@ -16,6 +16,7 @@ const (
 	Decimeter           = 1e-1 * Meter
 	Meter      Distance = 1
 	Kilometer           = 1e3 * Meter
+	Yard                = 0.9144 * Meter
 )
 
 func (d Distance) Nanometers() float64 {
@@ -40,6 +41,10 @@ func (d Distance) Meters() float64 {
 
 func (d Distance) Kilometers() float64 {
 	return float64(d / Kilometer)
+}
+
+func (d Distance) Yards() float64 {
+	return float64(d / Yard)
 }
 
 /* Operations */

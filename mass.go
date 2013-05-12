@@ -10,38 +10,38 @@ const (
 	Kilogram  Mass = 1
 	Megagram       = 1e3 * Kilogram
 	Tonne          = 1e3 * Kilogram
-	Pound          = 0.453592 * Kilogram
-	Ounce          = 0.0283495 * Kilogram
+	Pound          = 0.45359237 * Kilogram
+	Ounce          = 0.02834952312 * Kilogram
 )
 
-func (m Mass) Microgram() float64 {
+func (m Mass) Micrograms() float64 {
 	return float64(m / Microgram)
 }
 
-func (m Mass) Milligram() float64 {
+func (m Mass) Milligrams() float64 {
 	return float64(m / Milligram)
 }
 
-func (m Mass) Gram() float64 {
+func (m Mass) Grams() float64 {
 	return float64(m / Gram)
 }
-func (m Mass) Kilogram() float64 {
+func (m Mass) Kilograms() float64 {
 	return float64(m / Kilogram)
 }
 
-func (m Mass) Megagram() float64 {
+func (m Mass) Megagrams() float64 {
 	return float64(m / Megagram)
 }
 
-func (m Mass) Tonne() float64 {
+func (m Mass) Tonnes() float64 {
 	return float64(m / Tonne)
 }
 
-func (m Mass) Pound() float64 {
+func (m Mass) Pounds() float64 {
 	return float64(m / Pound)
 }
 
-func (m Mass) Ounce() float64 {
+func (m Mass) Ounces() float64 {
 	return float64(m / Ounce)
 }
 

@@ -7,7 +7,7 @@ import (
 )
 
 // Used to check weather two floats are 'different'
-const test_k = 0.0000001
+const test_k = 0.00001
 
 func cmpf64(f1, f2 float64) bool {
 	err := f2 - f1
@@ -67,6 +67,19 @@ func TestMass(t *testing.T) {
 	}
 	if !cmpf64(float64(1*Pound), float64(16*Ounce)) {
 		t.Error("1 lb != 16 oz")
+	}
+
+	// Test f64 converter functions:
+	var m Mass = 1 * Kilogram
+
+	if !cmpf64(m.Grams(), 1000) {
+		t.Error("(1kg).Grams() != 1000")
+	}
+	if !cmpf64(m.Pounds(), 2.20462) {
+		t.Error("(1kg).Pounds() != 2.20462")
+	}
+	if !cmpf64(m.Tonnes(), 0.001) {
+		t.Error("(1kg).Tonnes() != 0.001")
 	}
 }
 
