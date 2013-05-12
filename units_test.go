@@ -1,16 +1,16 @@
 package units
 
 import (
+	"math"
 	"testing"
 	"time"
-	"math"
 )
 
 // Used to check weather two floats are 'different'
 const test_k = 0.0000001
 
 func cmpf64(f1, f2 float64) bool {
-	err := f2 -f1
+	err := f2 - f1
 	if err < 0 {
 		err = -err
 	}
@@ -22,16 +22,16 @@ func cmpf64(f1, f2 float64) bool {
 
 func TestDistance(t *testing.T) {
 	// Test some selected constants:
-	if !cmpf64(float64(1e9 * Nanometer), float64(1 * Meter)) {
+	if !cmpf64(float64(1e9*Nanometer), float64(1*Meter)) {
 		t.Error("1e9 nm != 1 m")
 	}
-	if !cmpf64(float64(1000 * Millimeter), float64(1 * Meter)) {
+	if !cmpf64(float64(1000*Millimeter), float64(1*Meter)) {
 		t.Error("1000 mm != 1 m")
 	}
-	if !cmpf64(float64(100 * Centimeter), float64(1 * Meter)) {
+	if !cmpf64(float64(100*Centimeter), float64(1*Meter)) {
 		t.Error("100 cm != 1 m")
 	}
-	if !cmpf64(float64(1000 * Meter), float64(1 * Kilometer)) {
+	if !cmpf64(float64(1000*Meter), float64(1*Kilometer)) {
 		t.Error("10000 m != 1 km")
 	}
 
@@ -52,6 +52,21 @@ func TestDistance(t *testing.T) {
 	}
 	if !cmpf64(d.Micrometers(), 1e6) {
 		t.Error("(1m).Micrometers() != 1e6")
+	}
+}
+
+func TestMass(t *testing.T) {
+	if !cmpf64(float64(1000*Gram), float64(1*Kilogram)) {
+		t.Error("1000 * g != 1 kg")
+	}
+	if !cmpf64(float64(1*Tonne), float64(1e6*Gram)) {
+		t.Error("1 t != 1,000,000 g")
+	}
+	if !cmpf64(float64(1*Pound), float64(0.453592*Kilogram)) {
+		t.Error("1 lb != 0.453592 kg")
+	}
+	if !cmpf64(float64(1*Pound), float64(16*Ounce)) {
+		t.Error("1 lb != 16 oz")
 	}
 }
 
@@ -77,7 +92,7 @@ func TestAngles(t *testing.T) {
 	}
 
 	// Test f64 functions:
-	if !cmpf64(a1.Radians(), 2 * math.Pi) {
+	if !cmpf64(a1.Radians(), 2*math.Pi) {
 		t.Error("(2 Pi [rad]).Radians() != 2 Pi")
 	}
 	if !cmpf64(a1.Degrees(), 360) {
