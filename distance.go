@@ -17,6 +17,9 @@ const (
 	Meter      Distance = 1
 	Kilometer           = 1e3 * Meter
 	Yard                = 0.9144 * Meter
+	Mile                = 1609.34 * Meter
+	Foot                = 0.3048 * Meter
+	Inch                = 0.0254 * Meter
 )
 
 func (d Distance) Nanometers() float64 {
@@ -47,6 +50,18 @@ func (d Distance) Yards() float64 {
 	return float64(d / Yard)
 }
 
+func (d Distance) Miles() float64 {
+	return float64(d / Mile)
+}
+
+func (d Distance) Feet() float64 {
+	return float64(d / Foot)
+}
+
+func (d Distance) Inches() float64 {
+	return float64(d / Inch)
+}
+
 /* Operations */
 
 func (d Distance) Abs() Distance {
@@ -62,4 +77,8 @@ func (d Distance) DivideWithDuration(t time.Duration) Velocity {
 
 func Hypot(x, y Distance) Distance {
 	return Distance(math.Hypot(float64(x), float64(y)))
+}
+
+func (d Distance) MultiplyWithDistance(dist Distance) Area {
+	return Area(float64(d) * float64(dist))
 }

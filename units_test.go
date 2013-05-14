@@ -1,13 +1,14 @@
 package units
 
 import (
+	"fmt"
 	"math"
 	"testing"
 	"time"
 )
 
 // Used to check weather two floats are 'different'
-const test_k = 0.00001
+const test_k = 0.0001
 
 func cmpf64(f1, f2 float64) bool {
 	err := f2 - f1
@@ -17,6 +18,7 @@ func cmpf64(f1, f2 float64) bool {
 	if err < test_k {
 		return true
 	}
+	fmt.Println(f1, f2)
 	return false
 }
 
@@ -52,6 +54,9 @@ func TestDistance(t *testing.T) {
 	}
 	if !cmpf64(d.Micrometers(), 1e6) {
 		t.Error("(1m).Micrometers() != 1e6")
+	}
+	if !cmpf64(d.Inches(), 39.3701) {
+		t.Error("(1m).Inches() != 39.3701")
 	}
 }
 
@@ -134,6 +139,19 @@ func TestUnitOperations(t *testing.T) {
 		t.Error("distance != velocity * time")
 	}
 
+	// area = d1 * d2
+	s1 := Meter.MultiplyWithDistance(Meter)
+	s2 := SquareMeter
+	if !cmpf64(float64(s1), float64(s2)) {
+		t.Error("area != distance * distance")
+	}
+	d1 = Foot
+	s1 = d1.MultiplyWithDistance(d1)
+	s2 = SquareFoot
+	if !cmpf64(float64(s1), float64(s2)) {
+		t.Error("area != distance * distance")
+	}
+
 	// angular velocity = angle / time
 	r1 := Radian.DivideWithDuration(time.Second)
 	r2 := RadianPerSecond
@@ -146,5 +164,11 @@ func TestUnitOperations(t *testing.T) {
 	a2 := Radian
 	if !cmpf64(float64(a1), float64(a2)) {
 		t.Error("angle != angular velocity * time")
+	}
+
+	f := 500 * Hertz
+	p := f.Period()
+	if !cmpf64(float64(f), 1.0/float64(p.Seconds())) {
+		t.Error("period != 1 / frequency")
 	}
 }

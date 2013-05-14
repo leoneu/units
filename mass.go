@@ -12,6 +12,7 @@ const (
 	Tonne          = 1e3 * Kilogram
 	Pound          = 0.45359237 * Kilogram
 	Ounce          = 0.02834952312 * Kilogram
+	Stone          = 6.35029 * Kilogram
 )
 
 func (m Mass) Micrograms() float64 {
@@ -45,4 +46,12 @@ func (m Mass) Ounces() float64 {
 	return float64(m / Ounce)
 }
 
+func (m Mass) Stones() float64 {
+	return float64(m / Stone)
+}
+
 /* Operations */
+
+func (m Mass) MultiplyWithAcceleration(a Acceleration) Force {
+	return Force(float64(m) * float64(a))
+}
