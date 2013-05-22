@@ -16,6 +16,25 @@ const (
 	Gallon            = 0.00378541 * CubicMeter
 )
 
+var volume = map[string]Volume{
+	"milliliter":  Milliliter,
+	"ml":          Milliliter,
+	"deciliter":   Deciliter,
+	"dl":          Deciliter,
+	"cubic_meter": CubicMeter,
+	"cubic_inch":  CubicInch,
+	"cubic_foot":  CubicFoot,
+	"cubic_yard":  CubicYard,
+	"fluid_ounce": FluidOunce,
+	"quart":       Quart,
+	"gallon":      Gallon,
+}
+
+// Creates a new V=volume.
+func NewVolume(v float64, s string) Volume {
+	return Volume(v) * volume[s]
+}
+
 func (v Volume) Milliliters() float64 {
 	return float64(v / Milliliter)
 }

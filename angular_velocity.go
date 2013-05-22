@@ -14,6 +14,21 @@ const (
 	GradianPerSecond                     = RadianPerSecond * 400.0 / (2.0 * math.Pi)
 )
 
+var angularVelocity = map[string]AngularVelocity{
+	"milliradian_per_second": MilliradianPerSecond,
+	"mrad_per_second":        MilliradianPerSecond,
+	"radian_per_second":      RadianPerSecond,
+	"rad_per_second":         RadianPerSecond,
+	"degree_per_second":      DegreePerSecond,
+	"gradian_per_second":     GradianPerSecond,
+	"grad_per_second":        GradianPerSecond,
+}
+
+// Creates a new angular velocity.
+func NewAngularVelocity(v float64, s string) AngularVelocity {
+	return AngularVelocity(v) * angularVelocity[s]
+}
+
 func (v AngularVelocity) MilliradiansPerSecond() float64 {
 	return float64(v) / float64(Milliradian)
 }

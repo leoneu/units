@@ -22,7 +22,7 @@ func cmpf64(f1, f2 float64) bool {
 	return false
 }
 
-func TestDistance(t *testing.T) {
+func TestLength(t *testing.T) {
 	// Test some selected constants:
 	if !cmpf64(float64(1e9*Nanometer), float64(1*Meter)) {
 		t.Error("1e9 nm != 1 m")
@@ -37,8 +37,22 @@ func TestDistance(t *testing.T) {
 		t.Error("10000 m != 1 km")
 	}
 
+	// Create new value.
+	nd := NewLength(2.0, "kilometer")
+	if !cmpf64(nd.Kilometers(), 2.0) {
+		t.Error(`NewLength(2, "kilometer") != 2`)
+	}
+	nd = NewLength(555, "μm")
+	if !cmpf64(nd.Micrometers(), 555) {
+		t.Error(`NewLength(555, "μm") != 555`)
+	}
+	nd = NewLength(3, "foot")
+	if !cmpf64(nd.Meters(), 0.9144) {
+		t.Error(`NewLength(3, "foot") != 0.9144`)
+	}
+
 	// Test f64 converter functions:
-	var d Distance = 1 * Meter
+	var d Length = 1 * Meter
 
 	if !cmpf64(d.Kilometers(), 0.001) {
 		t.Error("(1m).Kilometers() != 0.001")
@@ -126,30 +140,30 @@ func TestAngularVelocity(t *testing.T) {
 }
 
 func TestUnitOperations(t *testing.T) {
-	// velocity = distance / time
+	// velocity = length / time
 	v1 := Meter.DivideWithDuration(time.Second)
 	v2 := MeterPerSecond
 	if !cmpf64(float64(v1), float64(v2)) {
-		t.Error("velocity != distance / time")
+		t.Error("velocity != length / time")
 	}
-	// distance = velocity * time
+	// length = velocity * time
 	d1 := MeterPerSecond.MultiplyWithDuration(time.Second)
 	d2 := Meter
 	if !cmpf64(float64(d1), float64(d2)) {
-		t.Error("distance != velocity * time")
+		t.Error("length != velocity * time")
 	}
 
 	// area = d1 * d2
-	s1 := Meter.MultiplyWithDistance(Meter)
+	s1 := Meter.MultiplyWithLength(Meter)
 	s2 := SquareMeter
 	if !cmpf64(float64(s1), float64(s2)) {
-		t.Error("area != distance * distance")
+		t.Error("area != length * length")
 	}
 	d1 = Foot
-	s1 = d1.MultiplyWithDistance(d1)
+	s1 = d1.MultiplyWithLength(d1)
 	s2 = SquareFoot
 	if !cmpf64(float64(s1), float64(s2)) {
-		t.Error("area != distance * distance")
+		t.Error("area != length * length")
 	}
 
 	// angular velocity = angle / time

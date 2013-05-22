@@ -4,7 +4,7 @@ Units
 Units is a small Go package that implements types, constants, converter
 functions and some mathematics for the following physical types:
 
-* Distance
+* Length
 * Velocity
 * Angle
 * Angular velocity
@@ -17,13 +17,13 @@ Why would I want to use the units package?
 
 When operating with programmed variables that hold physical types, it is
 sometimes hard to see what kinds of data a variable holds, and what kind of
-unit it is stored in.  Does it hold a velocity or a distance? Given it is a
+unit it is stored in.  Does it hold a velocity or a length? Given it is a
 velocity, does it store the value in meters per second, millimeteres per
 second, or in some other kind of unit? British miles per second perhaps? Or
 maybe in lightyears per minute? Is the angle measured in degrees or radians?
 
 By using the units package, all variables with a certain physical type (e.g.
-distance, angle or velocity), is stored in the same format with the same unit.
+length, angle or velocity), is stored in the same format with the same unit.
 Even though the numbers are always stored in the same way, you can specify them
 anyway you want, and represent them anyway you want.  E.g. even though an angle
 is stored as milliradians, you can specify it as degrees, and display it as
@@ -33,7 +33,7 @@ gradians.
 Because Go only allows explicit type casts, makes sure you are warned if
 you try to store one physical type in a variable that holds another physical
 type. E.g. it is hard to use a variable storing a velocity in a function that
-takes a distance, by a mistake.
+takes a length, by a mistake.
 
 For best practice, types from the units package should only be converted to
 float64 values by use of the converter functions (unless you have a good reason
@@ -58,7 +58,7 @@ Import and const definitions:
 		sec   = time.Second
 		msec  = time.Millisecond
 
-		// The following has type units.Distance:
+		// The following has type units.Length:
 		m     = units.Meter
 		cm    = units.Centimeter
 		mm    = units.Millimeter
@@ -72,9 +72,9 @@ Import and const definitions:
 		rad = units.Radian
 	)
 
-Distance to velocity example:
+Length to velocity example:
 
-    // For 'd', the type is units.Distance, the underlying type is flot64, and
+    // For 'd', the type is units.Length, the underlying type is flot64, and
     the underlying value is 6000.0:
     d := 6*m
 

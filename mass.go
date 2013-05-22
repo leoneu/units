@@ -15,6 +15,30 @@ const (
 	Stone          = 6.35029 * Kilogram
 )
 
+var mass = map[string]Mass{
+	"microgram": Microgram,
+	"\u03BCg":   Microgram,
+	"milligram": Milligram,
+	"mg":        Milligram,
+	"gram":      Gram,
+	"g":         Gram,
+	"kilogram":  Kilogram,
+	"kg":        Kilogram,
+	"megagram":  Megagram,
+	"tonne":     Tonne,
+	"t":         Tonne,
+	"pound":     Pound,
+	"lb":        Pound,
+	"ounce":     Ounce,
+	"oz":        Ounce,
+	"stone":     Stone,
+}
+
+// Creates a new mass.
+func NewMass(v float64, s string) Mass {
+	return Mass(v) * mass[s]
+}
+
 func (m Mass) Micrograms() float64 {
 	return float64(m / Microgram)
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type Coordinate struct {
-	X, Y Distance
+	X, Y Length
 }
 
 func CoordinateAdd(c1, c2 Coordinate) Coordinate {
@@ -19,10 +19,10 @@ func CoordinateSubtract(c1, c2 Coordinate) Coordinate {
 	return Coordinate{dx, dy}
 }
 
-func (c1 Coordinate) Distance(c2 Coordinate) Distance {
+func (c1 Coordinate) Length(c2 Coordinate) Length {
 	dx := c2.X - c1.X
 	dy := c2.Y - c1.Y
-	return Distance(math.Hypot(float64(dx), float64(dy)))
+	return Length(math.Hypot(float64(dx), float64(dy)))
 }
 
 func (c1 Coordinate) Angle(c2 Coordinate) Angle {
