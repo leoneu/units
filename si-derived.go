@@ -51,6 +51,7 @@ const (
 var acceleration = map[string]Acceleration{
 	"meter_per_second_squared": MeterPerSecondSquared,
 	"m_per_s_squared":          MeterPerSecondSquared,
+	"m_per_s_sq":               MeterPerSecondSquared,
 }
 
 // Creates a new acceleration.

@@ -18,7 +18,7 @@ var angularVelocity = map[string]AngularVelocity{
 	"milliradian_per_second": MilliradianPerSecond,
 	"mrad_per_second":        MilliradianPerSecond,
 	"radian_per_second":      RadianPerSecond,
-	"rad_per_second":         RadianPerSecond,
+	"rad_per_s":              RadianPerSecond,
 	"degree_per_second":      DegreePerSecond,
 	"gradian_per_second":     GradianPerSecond,
 	"grad_per_second":        GradianPerSecond,
